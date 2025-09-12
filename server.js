@@ -1,17 +1,19 @@
-import express from 'express';
+import express, { response } from 'express';
 
 
 
 const app = express();
 app.use(express.static('public'))
 
-app.get('/joke',async  (req,res) =>{
+app.get('/joke', async (req,res) =>{
     try{
-         const response = await fetch("https://icanhazdadjoke.com/",{
+       const response = await fetch("https://icanhazdadjoke.com/",{
          headers: {accept: 'application/json'}
+
          });
-         const data = await response.json();
-         res.json(data);
+       const data = await response.json();
+        res.json(data);
+    
     } catch (err) {
         res.status(500).json({error: 'failed to fetch joke'});
     }
